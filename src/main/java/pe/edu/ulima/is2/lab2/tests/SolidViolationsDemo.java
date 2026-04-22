@@ -95,6 +95,17 @@ public class SolidViolationsDemo {
 
     private static void demonstrateDIPViolation() {
         System.out.println("--- DIP Violation ---");
-        // TODO: Implementar demostración
+
+        System.out.println("===== REAL =====");
+
+        OrderService realService = DependencyInjector.createOrderService();
+        realService.processOrder("CLI-001");
+        realService.cancelOrder("ORDER-100", "CLI-001");
+
+        System.out.println("\n===== MOCKS =====");
+
+        OrderService testService = DependencyInjector.createTestOrderService();
+        testService.processOrder("TEST-001");
+        testService.cancelOrder("ORDER-100", "CLI-001");
     }
 }

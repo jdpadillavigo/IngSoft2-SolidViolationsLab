@@ -35,7 +35,6 @@ public class SolidViolationsDemo {
 
     private static void demonstrateOCPViolation() {
         System.out.println("--- OCP Violation ---");
-        // TODO: Implementar demostración
         PaymentProcessor procesador = new PaymentProcessor();
         PaymentMethod tarjeta = new CreditCardPayment();
         PaymentMethod bitcoin = new ApplePayPayment();
@@ -52,15 +51,34 @@ public class SolidViolationsDemo {
                 400,
                 "1234567890123456"
         )) {
-            System.out.println("Proceso de pago correcto");
+            System.out.println("Proceso de pago correcto\n");
         } else {
-            System.out.println("Error en el pago");
+            System.out.println("Error en el pago\n");
         }
     }
 
     private static void demonstrateLSPViolation() {
         System.out.println("--- LSP Violation ---");
-        // TODO: Implementar demostración
+        Product[] products = new Product[] {
+                new PhysicalProduct() {{
+                    name = "Laptop";
+                    basePrice = 2500;
+                }},
+                new DigitalProduct() {{
+                    name = "E-book";
+                    basePrice = 50;
+                }},
+                new ServiceProduct() {{
+                    name = "Mantenimiento";
+                    basePrice = 120;
+                }}
+        };
+
+        for (Product product : products) {
+            System.out.println("Producto: " + product.getName());
+            System.out.println("Precio: $" + product.calculatePrice());
+            System.out.println();
+        }
     }
 
     private static void demonstrateISPViolation() {

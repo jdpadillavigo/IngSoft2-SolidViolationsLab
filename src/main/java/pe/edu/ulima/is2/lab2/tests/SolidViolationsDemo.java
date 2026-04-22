@@ -83,7 +83,14 @@ public class SolidViolationsDemo {
 
     private static void demonstrateISPViolation() {
         System.out.println("--- ISP Violation ---");
-        // TODO: Implementar demostración
+        OrderManager basicOrders = new BasicOrderProcessor();
+        basicOrders.createOrder("C001", new String[]{"P001", "P002"});
+
+        ShippingService shipping = new ShippingOrderProcessor();
+        shipping.calculateShippingCost("O001");
+        shipping.scheduleDelivery("O001", "30-04-2026");
+        shipping.trackShipment("O001");
+        System.out.println();
     }
 
     private static void demonstrateDIPViolation() {

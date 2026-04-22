@@ -1,8 +1,6 @@
 package pe.edu.ulima.is2.lab2.tests;
 
-import pe.edu.ulima.is2.lab2.corrected.DiscountCalculator;
-import pe.edu.ulima.is2.lab2.corrected.User;
-import pe.edu.ulima.is2.lab2.corrected.UserReportGenerator;
+import pe.edu.ulima.is2.lab2.corrected.*;
 
 public class SolidViolationsDemo {
     public static void main(String[] args) {
@@ -38,6 +36,26 @@ public class SolidViolationsDemo {
     private static void demonstrateOCPViolation() {
         System.out.println("--- OCP Violation ---");
         // TODO: Implementar demostración
+        PaymentProcessor procesador = new PaymentProcessor();
+        PaymentMethod tarjeta = new CreditCardPayment();
+        PaymentMethod bitcoin = new ApplePayPayment();
+        PaymentMethod transferencia = new BankTransferPayment();
+        PaymentMethod paypal = new PaypalPayment();
+
+        procesador.registerPaymentMethod(tarjeta);
+        procesador.registerPaymentMethod(bitcoin);
+        procesador.registerPaymentMethod(transferencia);
+        procesador.registerPaymentMethod(paypal);
+
+        if(procesador.processPayment(
+                tarjeta.getPaymentType(),
+                400,
+                "1234567890123456"
+        )) {
+            System.out.println("Proceso de pago correcto");
+        } else {
+            System.out.println("Error en el pago");
+        }
     }
 
     private static void demonstrateLSPViolation() {
